@@ -1,0 +1,20 @@
+[00:08:55] [main/INFO]: Setting user: Player299
+[00:08:57] [Client thread/INFO]: LWJGL Version: 2.9.1
+[00:09:12] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ForestryExtension, FMLFileResourcePack:Forestry for Minecraft
+[00:09:14] [Sound Library Loader/INFO]: Sound engine started
+[00:09:17] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
+[00:09:17] [Client thread/INFO]: Created: 16x16 textures/items-atlas
+[00:09:18] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ForestryExtension, FMLFileResourcePack:Forestry for Minecraft
+[00:09:19] [Client thread/INFO]: Created: 512x512 textures/blocks-atlas
+[00:09:19] [Client thread/INFO]: Created: 512x256 textures/items-atlas
+[00:09:20] [Sound Library Loader/INFO]: Sound engine started
+[00:09:23] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
+[00:09:23] [Server thread/INFO]: Generating keypair
+[00:09:23] [Server thread/INFO]: Preparing start region for level 0
+[00:09:24] [Server thread/INFO]: Changing view distance to 12, from 10
+[00:09:24] [Server thread/INFO]: Player299[local:E:11e5f92e] logged in with entity id 113 at (-1255.6013197171947, 4.0, 237.2798146484992)
+[00:09:24] [Server thread/INFO]: Player299 joined the game
+[00:09:25] [Server thread/INFO]: Saving and pausing game...
+[00:09:25] [Server thread/INFO]: Saving chunks for level 'Test'/Overworld
+[00:09:25] [Server thread/INFO]: Saving chunks for level 'Test'/Nether
+[00:09:25] [Server thread/INFO]: Saving chunks for level 'Test'/The End
