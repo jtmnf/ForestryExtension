@@ -4,11 +4,16 @@ import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
 import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.RecipeManagers;
+import jtmnf.forestryextension.util.LogHelper;
+import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -123,7 +128,19 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
 
     @Override
     public void updateEntity() {
-        if(getStackInSlot(0) != null && isCombThere && !worldObj.isRemote) {
+        if(!worldObj.isRemote){
+            if(getStackInSlot(0) != null){
+                setInventorySlotContents(1, getStackInSlot(0));
+                setInventorySlotContents(0, null);
+            }
+        }
+        else{
+            if(getStackInSlot(0) != null){
+                setInventorySlotContents(1, getStackInSlot(0));
+                setInventorySlotContents(0, null);
+            }
+        }
+        /*if(getStackInSlot(0) != null && isCombThere && !worldObj.isRemote) {
             ItemStack itemStack = getStackInSlotOnClosing(0);
             Object[] products = getProductsByComb(itemStack);
 
@@ -184,14 +201,18 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
                             }
                         }
                     }
+
                     setInventorySlotContents(0, null);
                     isCombThere = false;
+
+                    LogHelper.info("Tell me that this works...");
+                    markDirty();
                 }
             }
         }
         else if(getStackInSlot(0) == null && !worldObj.isRemote){
             isCombThere = true;
-        }
+        }*/
     }
 
     /* ================================================================================= */
