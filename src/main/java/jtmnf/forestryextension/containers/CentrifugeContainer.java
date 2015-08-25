@@ -1,5 +1,7 @@
 package jtmnf.forestryextension.containers;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import jtmnf.forestryextension.containers.slots.SlotZero;
 import jtmnf.forestryextension.tileentity.CentrifugeTileEntity;
 import jtmnf.forestryextension.util.LogHelper;
@@ -10,10 +12,14 @@ import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CentrifugeContainer extends Container {
     private CentrifugeTileEntity machine;
-    public static int energy;
-    public static boolean isEnergy;
+
+    private int time;
+    private int energyStored;
 
     public CentrifugeContainer(InventoryPlayer inventoryPlayer, CentrifugeTileEntity centrifugeTileEntity) {
         this.machine = centrifugeTileEntity;
@@ -54,11 +60,39 @@ public class CentrifugeContainer extends Container {
     @Override
     public void addCraftingToCrafters(ICrafting p_75132_1_) {
         super.addCraftingToCrafters(p_75132_1_);
+
+        p_75132_1_.sendProgressBarUpdate(this, 0, this.machine.time);
+        p_75132_1_.sendProgressBarUpdate(this, 1, this.machine.energyStorage.getEnergyStored());
     }
 
     @Override
     public void detectAndSendChanges() {
-        energy = machine.energyStorage.getEnergyStored();
-        isEnergy = machine.isEnergy;
+        super.detectAndSendChanges();
+
+        for (int i = 0; i < this.crafters.size(); ++i) {
+            ICrafting icrafting = (ICrafting)this.crafters.get(i);
+
+            if (this.time != this.machine.time) {
+                icrafting.sendProgressBarUpdate(this, 0, this.machine.time);
+            }
+
+            if(this.energyStored != this.machine.energyStorage.getEnergyStored()){
+                icrafting.sendProgressBarUpdate(this, 1, this.machine.energyStorage.getEnergyStored());
+            }
+        }
+
+        this.time = this.machine.time;
+        this.energyStored = this.machine.energyStorage.getEnergyStored();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void updateProgressBar(int p_75137_1_, int p_75137_2_) {
+        if (p_75137_1_ == 0) {
+            this.machine.time = p_75137_2_;
+        }
+
+        if (p_75137_1_ == 1) {
+            this.machine.energyStorage.setEnergyStored(p_75137_2_);
+        }
     }
 }

@@ -36,17 +36,17 @@ public class InterfaceCentrifuge extends GuiContainer {
 
         drawWorkingArrow();
         drawEnergyBar();
-        drawNoEnergy();
+        //drawNoEnergy();
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         if (x >= guiLeft + 6 && x <= guiLeft + 15 && y >= guiTop + 6 && y <= guiTop + 122) {
             List list = new ArrayList();
-            list.add("Power: "+CentrifugeContainer.energy+"RF");
+            list.add("Power: "+machine.energyStorage.getEnergyStored()+"RF");
             this.drawHoveringText(list, x - guiLeft, y - guiTop, fontRendererObj);
         } else {
-            // not hovering
+             //not hovering
         }
     }
 
@@ -61,8 +61,9 @@ public class InterfaceCentrifuge extends GuiContainer {
         }
     }
 
+
     protected void drawEnergyBar(){
-        float height = (CentrifugeContainer.energy * 117F) / machine.energyStorage.getMaxEnergyStored();
+        float height = (machine.energyStorage.getEnergyStored() * 117F) / machine.energyStorage.getMaxEnergyStored();
 
         int srcX = xSize;
         int srcY = ENERGY_PIXELS - Math.round(height);
@@ -71,7 +72,7 @@ public class InterfaceCentrifuge extends GuiContainer {
     }
 
     protected void drawNoEnergy(){
-        if(CentrifugeContainer.isEnergy){
+        if(machine.isEnergy){
             drawTexturedModalRect(guiLeft + 41, guiTop + 21, 13, ySize, 9, 9);
         }
     }

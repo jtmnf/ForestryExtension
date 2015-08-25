@@ -2,18 +2,16 @@ package jtmnf.forestryextension.tileentity;
 
 import cofh.api.energy.EnergyStorage;
 import cofh.api.energy.IEnergyHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import forestry.api.recipes.ICentrifugeRecipe;
 import forestry.api.recipes.RecipeManagers;
 import jtmnf.forestryextension.util.LogHelper;
-import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -27,11 +25,11 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
     private boolean isCombThere = true;
     private boolean active = false;
 
-    public static int time;
-    public static int TIME_TO_PROCESS_COMBS = 24 * 8; //24 ticks per second * 8 seconds = 192 ticks;
+    public int time;
+    public static float TIME_TO_PROCESS_COMBS = 24 * 8; //24 ticks per second * 8 seconds = 192 ticks;
+    public static int COST_PER_COMB = 3500;
 
     public EnergyStorage energyStorage;
-    public static int COST_PER_COMB = 3500;
     public boolean isEnergy = false;
 
     /* =================================================================================== */
@@ -76,8 +74,16 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
 
     @Override
     public ItemStack getStackInSlotOnClosing(int slot) {
-        ItemStack item = getStackInSlot(slot);
-        return item;
+        if (this.items[slot] != null)
+        {
+            ItemStack itemstack = this.items[slot];
+            this.items[slot] = null;
+            return itemstack;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     @Override
@@ -128,20 +134,8 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
 
     @Override
     public void updateEntity() {
-        if(!worldObj.isRemote){
-            if(getStackInSlot(0) != null){
-                setInventorySlotContents(1, getStackInSlot(0));
-                setInventorySlotContents(0, null);
-            }
-        }
-        else{
-            if(getStackInSlot(0) != null){
-                setInventorySlotContents(1, getStackInSlot(0));
-                setInventorySlotContents(0, null);
-            }
-        }
-        /*if(getStackInSlot(0) != null && isCombThere && !worldObj.isRemote) {
-            ItemStack itemStack = getStackInSlotOnClosing(0);
+        if(getStackInSlot(0) != null && isCombThere && !worldObj.isRemote) {
+            ItemStack itemStack = getStackInSlot(0);
             Object[] products = getProductsByComb(itemStack);
 
             if((COST_PER_COMB * itemStack.stackSize) > energyStorage.getEnergyStored() && !active){
@@ -159,7 +153,7 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
                     time++;
 
                     active = true;
-                    energyStorage.setEnergyStored(energyStorage.getEnergyStored() - ((COST_PER_COMB * itemStack.stackSize)/TIME_TO_PROCESS_COMBS));
+                    energyStorage.setEnergyStored(energyStorage.getEnergyStored() - Math.round((COST_PER_COMB * itemStack.stackSize)/TIME_TO_PROCESS_COMBS));
                 } else {
                     for (int i = 0; i < products.length; ++i) {
                         active = false;
@@ -205,14 +199,13 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
                     setInventorySlotContents(0, null);
                     isCombThere = false;
 
-                    LogHelper.info("Tell me that this works...");
                     markDirty();
                 }
             }
         }
         else if(getStackInSlot(0) == null && !worldObj.isRemote){
             isCombThere = true;
-        }*/
+        }
     }
 
     /* ================================================================================= */
@@ -339,6 +332,11 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
         }
 
         return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getCookProgressScaled(int p_145953_1_) {
+        return Math.round(this.time * p_145953_1_ / TIME_TO_PROCESS_COMBS);
     }
 
     /* ====================================================================================== */
