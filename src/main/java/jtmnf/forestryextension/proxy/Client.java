@@ -1,6 +1,8 @@
 package jtmnf.forestryextension.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import jtmnf.forestryextension.register.BlockRegister;
 import jtmnf.forestryextension.render.CentrifugeRender;
 import jtmnf.forestryextension.render.CentrifugeRenderInventory;
@@ -11,7 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class Client extends Common {
-    public static void registerRender() {
+    public void registerRender() {
         TileEntitySpecialRenderer tileEntitySpecialRenderer = new CentrifugeRender();
         TileEntitySpecialRenderer tileEntitySpecialRendererInventory = new CentrifugeRenderInventory();
 
@@ -22,8 +24,5 @@ public class Client extends Common {
             /* RENDER BLOCK IN INVENTORY */
             MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegister.centrifugeExtension), new ItemRendererCentrifuge(tileEntitySpecialRendererInventory, new CentrifugeTileEntity()));
         }
-    }
-
-    public static void registerThings(){;
     }
 }

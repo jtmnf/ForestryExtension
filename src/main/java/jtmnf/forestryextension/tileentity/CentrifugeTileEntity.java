@@ -9,6 +9,7 @@ import forestry.api.recipes.RecipeManagers;
 import jtmnf.forestryextension.util.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -20,7 +21,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-public class CentrifugeTileEntity extends TileEntity implements IInventory, ICentrifugeRecipe, IEnergyHandler {
+public class CentrifugeTileEntity extends TileEntity implements ISidedInventory, ICentrifugeRecipe, IEnergyHandler {
     private ItemStack[] items;
     private boolean isCombThere = true;
     private boolean active = false;
@@ -135,6 +136,8 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
     @Override
     public void updateEntity() {
         if(getStackInSlot(0) != null && isCombThere && !worldObj.isRemote) {
+            setTimeToProcessCombs();
+
             ItemStack itemStack = getStackInSlot(0);
             Object[] products = getProductsByComb(itemStack);
 
@@ -334,9 +337,10 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
-    public int getCookProgressScaled(int p_145953_1_) {
-        return Math.round(this.time * p_145953_1_ / TIME_TO_PROCESS_COMBS);
+    public void setTimeToProcessCombs(){
+        if(getStackInSlot(7) != null){
+            TIME_TO_PROCESS_COMBS = 24 * 4;
+        }
     }
 
     /* ====================================================================================== */
@@ -366,5 +370,22 @@ public class CentrifugeTileEntity extends TileEntity implements IInventory, ICen
     @Override
     public boolean canConnectEnergy(ForgeDirection from) {
         return true;
+    }
+
+
+    /* SIDED INVENTORY */
+    @Override
+    public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+        return new int[0];
+    }
+
+    @Override
+    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
+        return false;
+    }
+
+    @Override
+    public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
+        return false;
     }
 }

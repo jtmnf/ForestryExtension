@@ -1,5 +1,7 @@
 package jtmnf.forestryextension.render;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import jtmnf.forestryextension.models.ModelCentrifuge;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -22,6 +24,7 @@ public class CentrifugeRenderInventory extends TileEntitySpecialRenderer{
 
     /* In: http://www.minecraftforge.net/wiki/Rendering_a_Techne_Model_as_a_Block */
     @Override
+    @SideOnly(Side.CLIENT)
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale) {
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x + 0.5F, (float) y + 1.4F, (float) z + 0.5F);
@@ -36,6 +39,7 @@ public class CentrifugeRenderInventory extends TileEntitySpecialRenderer{
         GL11.glPopMatrix();
     }
 
+    @SideOnly(Side.CLIENT)
     private void adjustLightFixture(World world, int i, int j, int k, Block block) {
         Tessellator tess = Tessellator.instance;
         float brightness = block.getLightValue(world, i, j, k);

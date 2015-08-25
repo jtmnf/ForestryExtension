@@ -1,5 +1,7 @@
 package jtmnf.forestryextension.render;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -17,16 +19,19 @@ public class ItemRendererCentrifuge implements IItemRenderer {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         return true;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
         return true;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         if(type == ItemRenderType.ENTITY){
             GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
