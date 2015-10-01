@@ -36,7 +36,6 @@ public class InterfaceCentrifuge extends GuiContainer {
 
         drawWorkingArrow();
         drawEnergyBar();
-        //drawNoEnergy();
     }
 
     @Override
@@ -69,11 +68,5 @@ public class InterfaceCentrifuge extends GuiContainer {
         int srcY = ENERGY_PIXELS - Math.round(height);
 
         drawTexturedModalRect(guiLeft + 6, guiTop + 6 + 117 - Math.round(height), srcX, srcY, 10, Math.round(height));
-    }
-
-    protected void drawNoEnergy(){
-        if(machine.isEnergy){
-            drawTexturedModalRect(guiLeft + 41, guiTop + 21, 13, ySize, 9, 9);
-        }
     }
 }

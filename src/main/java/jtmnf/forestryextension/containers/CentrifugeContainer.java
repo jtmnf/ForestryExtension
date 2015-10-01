@@ -87,12 +87,13 @@ public class CentrifugeContainer extends Container {
 
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int p_75137_1_, int p_75137_2_) {
+        super.updateProgressBar(p_75137_1_, p_75137_2_);
         if (p_75137_1_ == 0) {
             this.machine.time = p_75137_2_;
         }
 
         if (p_75137_1_ == 1) {
-            this.machine.energyStorage.setEnergyStored(p_75137_2_);
+            this.machine.setEnergyStorage(p_75137_2_);
         }
     }
 }

@@ -372,6 +372,10 @@ public class CentrifugeTileEntity extends TileEntity implements ISidedInventory,
         return true;
     }
 
+    public void setEnergyStorage(int energyStorage){
+        this.energyStorage.setEnergyStored(energyStorage);
+    }
+
 
     /* SIDED INVENTORY */
     @Override
