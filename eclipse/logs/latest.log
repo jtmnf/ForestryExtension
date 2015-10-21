@@ -1,25 +1,2 @@
-[13:25:39] [main/INFO]: Setting user: Player847
-[13:25:41] [Client thread/INFO]: LWJGL Version: 2.9.1
-[13:25:59] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ForestryExtension, FMLFileResourcePack:Forestry for Minecraft
-[13:26:03] [Sound Library Loader/INFO]: Sound engine started
-[13:26:04] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
-[13:26:04] [Client thread/INFO]: Created: 16x16 textures/items-atlas
-[13:26:05] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:ForestryExtension, FMLFileResourcePack:Forestry for Minecraft
-[13:26:05] [Client thread/INFO]: Created: 512x512 textures/blocks-atlas
-[13:26:06] [Client thread/INFO]: Created: 512x256 textures/items-atlas
-[13:26:07] [Sound Library Loader/INFO]: Sound engine started
-[13:26:09] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[13:26:09] [Server thread/INFO]: Generating keypair
-[13:26:09] [Server thread/INFO]: Preparing start region for level 0
-[13:26:10] [Server thread/INFO]: Changing view distance to 12, from 10
-[13:26:10] [Server thread/INFO]: Player847[local:E:eafe6c77] logged in with entity id 113 at (-1254.9906686427698, 4.0, 236.49119206284135)
-[13:26:10] [Server thread/INFO]: Player847 joined the game
-[13:26:12] [Server thread/INFO]: Player847 has just earned the achievement [Taking Inventory]
-[13:26:12] [Client thread/INFO]: [CHAT] Player847 has just earned the achievement [Taking Inventory]
-[13:26:25] [Client thread/INFO]: Stopping!
-[13:26:25] [Server thread/INFO]: Stopping server
-[13:26:25] [Server thread/INFO]: Saving players
-[13:26:25] [Server thread/INFO]: Saving worlds
-[13:26:25] [Server thread/INFO]: Saving chunks for level 'Test'/Overworld
-[13:26:26] [Server thread/INFO]: Saving chunks for level 'Test'/Nether
-[13:26:26] [Server thread/INFO]: Saving chunks for level 'Test'/The End
+[23:35:05] [main/INFO]: Setting user: Player710
+[23:35:08] [Client thread/INFO]: LWJGL Version: 2.9.1
